@@ -34,4 +34,4 @@ sqlparse
 twilio                
 tzdata                
 urllib3                
-yarl                 
+yarl                  
