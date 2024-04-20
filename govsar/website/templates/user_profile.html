@@ -1,0 +1,92 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <a href="{% url 'website:change_pfp' %}"><i class="fas fa-pencil-alt" style="margin-left: 255px; margin-bottom: -18px;"></i></a>
+            <div class="text-center mb-3 rounded rounded-circle">
+            
+                <img src="{{userprofile.pfp.url}}" alt="Profile Picture" style="width:250px; height:250px;" class="img-fluid rounded-circle">
+              
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">User Information</h5>
+                    <p class="card-text"><strong>username: </strong>{{request.user.username}}</p>
+                    <p class="card-text"><strong>Name: </strong>{{request.user.first_name}}</p>
+                    <p class="card-text"><strong>Email: </strong>{{request.user.email}}</p>
+                    <p class="card-text"><strong>Phone: </strong>{{userprofile.phone}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Edit Profile <i class="fas fa-user"></i>
+                </div>
+                <div class="card-body">
+                    <form id="profileForm" method="POST" action="{% url 'website:edit_profile' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" value="{{request.user.username}}">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="fullName">Name</label>
+                            <input type="text" class="form-control" name="name" value="{{request.user.first_name}} {{request.user.last_name}}">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{request.user.email}}">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="number" class="form-control" id="phone" name="phone" value="{{userprofile.phone}}">
+                        </div>
+                        <br>
+                        <button style="width: 20%; margin-left: 20px;" type="submit" class="mb-3 btn btn-primary">Save Changes</button>
+                    </form>
+                    <a href="{% url 'website:verify_phone_number' %}"><button style="width: 50%; margin-left: 20px; background-color:navy;" class="mb-3 btn btn-primary">Verify phone number</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Custom JS -->
+<!-- <script>
+    // Add custom JavaScript here
+    $(document).ready(function() {
+        // Example: Perform AJAX request to save profile changes
+        $('#profileForm').submit(function(event) {
+            event.preventDefault();
+            // Serialize form data
+            var formData = $(this).serialize();
+            // Perform AJAX request
+            $.ajax({
+                url: '/save_profile/',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Handle success response
+                    console.log(response);
+                    alert('Profile updated successfully!');
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                    alert('An error occurred while updating the profile.');
+                }
+            });
+        });
+    });
+</script> -->
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="rounded" style="background-color: rgba(177, 177, 177, 0.94); margin-left: 500px; margin-right: 500px;">
+        <div class="container mt-5 py-4">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <h2 class="text-center mb-4">Change profile Picture</h2>
+                    <form id="myForm" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group py-2">
+                            <label>New profile picture</label>
+                            <input type="file" class="form-control-file" name="image">
+                        </div>
+                        <button type="delete_pfp" class="btn btn-primary" style="color: red !important;">Delete pfp</button>
+                        <br>
+                        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

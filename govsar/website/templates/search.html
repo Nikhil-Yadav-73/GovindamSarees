@@ -1,0 +1,52 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% block content %}
+
+    <br>
+    <br>
+
+    <div class="p-4 pb-6 container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <form method="get" action="{% url 'website:search' %}">
+                    <input name="query" class="form-control mb-2" type="text" value="{{query}}" placeholder="Find anything">
+                    <button class="btn btn-primary btn-block">Search</button>
+                </form>
+                
+                <hr class="my-4">
+                <p class="font-weight-bold">Clear filters</p>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'website:search' %}" class="btn btn-warning btn-block">Clear</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row">
+                    {% if items %}
+                        {% for item in items %}
+                                <div class="col-md-4 mb-4">
+                                    <a href="{% url 'website:item_desc' item.id %}" style="text-decoration: none;">
+                                        <div style="width: 225px; height: 225px;">
+                                            <img src="{{ item.image.url }}" class="img-fluid rounded-top" alt="{{ item.name }}">
+                                        </div>    
+                                        <div class="p-3 bg-white rounded-bottom">
+                                            <h2 class="h5">{{ item.name }}</h2>
+                                            <p class="text-muted">Price: {{ item.price }}</p>
+                                        </div> 
+                                    </a>   
+                                </div>
+                               
+                        {% endfor %}   
+                    {% else %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <h4>No matching items found</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

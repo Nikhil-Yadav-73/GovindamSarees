@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Verify Code</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="verification_code">Verification Code:</label>
+        <input type="text" id="verification_code" name="verification_code" required>
+        <button type="submit">Verify</button>
+    </form>
+    
+{% endblock %}

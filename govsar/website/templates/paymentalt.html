@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Make Payment{% endblock title %}
+<style>
+  .payment-default {
+    position: relative;
+    height: 11rem;
+    /* width: 30%; */
+    border-radius: 1rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-width: 2px;
+    --tw-border-opacity: .2;
+    border-color: rgb(107 114 128 / var(--tw-border-opacity));
+  }
+
+  .payment-default:hover {
+    cursor: pointer;
+    border-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(59 130 246 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  .payment-default-active {
+    position: relative;
+    height: 11rem;
+    /* width: 30%; */
+    border-radius: 1rem;
+    border-width: 2px;
+    --tw-border-opacity: 1;
+    border-color: rgb(59 130 246 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .payment-default-active:hover {
+    cursor: pointer;
+  }
+</style>
+{% block body %}
+<!-- Main -->
+<form action="" method="post">
+  {% csrf_token %}
+  <input type="text" value="{{objID}}" name="obj" hidden>
+<main class="mt-20 bg-gray-200 p-5 md:px-52">
+  <!-- Services -->
+  <div class="w-full">
+    <h1 class="text-3xl text-gray-500 font-semibold">Service Type</h1>
+    <!-- Services Cards -->
+    <div class="mt-5 flex justify-between sm:flex-row flex-col sm:gap-0 gap-16 w-full">
+      <!-- Card 1 -->
+      <div class="payment-default my-transition sm:w-[30%] w-full">
+        <label class="text-3xl font-semibold text-black" for="standard">Standard</label>
+        <p class="text-base text-gray-400 mt-2"><span style="font-weight: 600; font-size: 18px;">&#8377;</span>0.3/ word</p>
+        <p class="text-xs font-bold text-black mt-2 mb-3">
+          Estimated Time:- 10 mins/ page
+        </p>
+        <div class="check-color-payement-default"></div>
+      </div>
+      <!-- End of Card 1 -->
+      <!-- Card 2 -->
+      <div class="payment-default my-transition sm:w-[30%] w-full">
+        <label class="text-3xl font-semibold text-black" for="premium">Premium</label>
+        <p class="text-base text-gray-400 mt-2">
+          <span style="font-weight: 600; font-size: 18px;">&#8377;</span>0.5/ word
+        </p>
+        <p class="text-xs font-bold text-black mt-2 mb-3">
+          Estimated Time:- 5 mins/ page
+        </p>
+        <div class="check-color-payement-default"></div>
+      </div>
+      <!-- End of Card 2 -->
+      <!-- Card 3 -->
+      <a href="{% url 'contact_sales' %}" class="bg-white px-5 h-44 py-8 rounded-2xl relative hover:cursor-pointer my-transition sm:w-[30%] w-full">
+      <div>
+        <p class="text-3xl font-semibold text-black">Enterprise</p>
+        <p class="text-base text-gray-400 mt-2">Contact Us</p>
+        <p class="text-xs font-bold text-black mt-2 mb-3">
+          Estimated Time:- Contact
+        </p>
+        <div class="check-color-payement-default"></div>
+      </div>
+    </a>
+      <!-- End of Card 3 -->
+    </div>
+    <!-- End of Services Cards -->
+  </div>
+  <input type="radio" class="rad" id="standard" name="service" value="0.3" required hidden>
+  <input type="radio" class="rad" id="premium" name="service" value="0.5" required hidden>
+  <!-- End of Services -->
+  <!-- Mode -->
+  <div class="mt-8">
+    <h1 class="text-3xl text-gray-500 font-semibold">
+      Mode of Translation
+    </h1>
+    <!-- Mode Cards -->
+    <div class="mt-5 flex justify-between sm:flex-row flex-col sm:gap-0 gap-5">
+      <!-- Card 1 -->
+      <div class="mode-default">
+        <div class="check-mode-default"></div>
+        <label for="business" class="text-lg">Business/Formal</label>
+      </div>
+      <!-- End of Card 1 -->
+      <!-- Card 2 -->
+      <div class="mode-default">
+        <div class="check-mode-default"></div>
+        <label for="friendly" class="text-lg">Colloquial/Friendly</label>
+      </div>
+      <!-- End of Card 2 -->
+      <!-- Card 3 -->
+      <div class="mode-default">
+        <div class="check-mode-default"></div>
+        <label for="creative" class="text-lg">Creative</label>
+      </div>
+      <!-- End of Card 3 -->
+    </div>
+    <input type="radio" id="business" required hidden>
+    <input type="radio" id="friendly" required hidden>
+    <input type="radio" id="creative" required hidden>
+    <!-- End of Mode Cards -->
+  </div>
+  <!-- End of Mode -->
+  <!-- Order Summary -->
+  <div class="mt-16">
+    <h1 class="text-3xl text-gray-500 font-semibold">Order Summary</h1>
+
+    <div class="bg-white mt-8 py-5 px-5 flex sm:flex-row flex-col">
+      <!-- Left -->
+      <div class="sm:w-3/5 w-full sm:border-r-2 border-gray-400">
+        <p class="text-5xl text-black font-semibold">{{total_words}}</p>
+        <p class="text-base text-gray-400">Total words in order</p>
+        <p class="text-lg text-gray-400 mt-4">
+          language:-
+          <span class="text-black font-semibold">{{srcLang}} To: {{tgtLang}}</span>
+        </p>
+        <p class="text-black font-semibold text-lg mt-4">
+          Estimated Time:- <span id="time">-</span>
+        </p>
+      </div>
+      <!-- End of Left -->
+      <!-- Right -->
+      <div class="sm:w-2/5 w-full sm:border-l-2 pl-2 sm:mt-0 mt-10">
+        <div class="mt-5 flex sm:justify-end w-full">
+          <table class="table-auto w-full">
+            <tbody>
+              <tr>
+                <td class="pr-10 pl-10 py-4 text-xl text-gray-600">
+                  Amount
+                </td>
+                <td class="pl-10 py-2 text-gray-600 text-xl">
+                  <i class="fa-solid fa-indian-rupee-sign mr-1"></i><span id="amt">0</span>
+                </td> 
+              </tr>
+              <tr>
+                <td class="pr-10 pt-2 pl-10 pb-8 text-xl text-gray-600" >
+                  GST(18%)
+                </td>
+                <td class="pl-10 py-2 pb-8 text-gray-600 text-xl">
+                  <i class="fa-solid fa-indian-rupee-sign mr-1"></i><span id="gst">0</span>
+                </td>
+              </tr>
+              <tr class="border-t-2 border-gray-500">
+                <td class="pr-5 pl-10 py-5 text-xl text-black font-semibold">
+                  Total
+                </td>
+                <td class="pl-10 py-5 text-xl text-black font-semibold" >
+                  <i class="fa-solid fa-indian-rupee-sign mr-1"></i><span id="total">0</span>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- End of Right -->
+    </div>
+  </div>
+  <!-- End of Order Summary -->
+  <!-- Buttons -->
+  <div class="mt-10 flex justify-between sm:flex-row flex-col sm:gap-0 gap-5">
+    <button class="primary-btn border-2 bg-blue-200 border-blue-500 text-black sm:w-44 w-full">
+      <i class="fa-solid fa-backward-step mr-1"></i>
+      Back
+    </button>
+    <button class="primary-btn sm:w-44 w-full">
+      <i class="fa-regular fa-circle-check mr-1"></i>Order
+    </button>
+  </div>
+  <!-- End of Buttons -->
+</main>
+</form>
+<!-- End of Main -->
+<script>
+  const serviceCards = Array.from(document.getElementsByClassName('payment-default'));
+  serviceCards.forEach(function (card) {
+    card.addEventListener("click", function () {
+      for (var i in serviceCards) {
+        const label = serviceCards[i].getElementsByTagName("label")[0];
+        const d = serviceCards[i].getElementsByTagName('div')[0];
+        if (serviceCards[i] == card) {
+          serviceCards[i].classList.add("payment-default-active");
+          d.classList.add('check-color-payment-active');
+          var total = (document.getElementById(label.attributes.for.value).value)*{{total_words}};
+          total = Math.round(total*100)/100;
+          document.getElementById('amt').textContent = total;
+          document.getElementById('gst').textContent =  Math.round((total*18))/100;
+          document.getElementById('total').textContent = Math.round(total + ((total*18)/100));
+          document.getElementById(label.attributes.for.value).checked = true;
+          if((label.attributes.for.value) == "standard") {
+            document.getElementById('time').textContent = "10 mins/page";
+          }
+          else if((label.attributes.for.value) == "premium") {
+            document.getElementById('time').textContent = "5 mins/page";
+          }
+        } else {
+          serviceCards[i].classList.remove("payment-default-active");
+          d.classList.remove('check-color-payment-active');
+          document.getElementById(label.attributes.for.value).checked = false;
+        }
+      }
+    })
+  });
+
+  const modeCards = Array.from(document.getElementsByClassName('mode-default'));
+  modeCards.forEach(function (card) {
+    card.addEventListener("click", function () {
+      for (var i in modeCards) {
+        const label = modeCards[i].getElementsByTagName("label")[0];
+        const div = modeCards[i].getElementsByTagName('div')[0];
+        if (modeCards[i] == card) {
+          modeCards[i].classList.add("mode-active");
+          div.classList.add('check-mode-active');
+          document.getElementById(label.attributes.for.value).checked = true;
+        } else {
+          modeCards[i].classList.remove("mode-active");
+          div.classList.remove('check-mode-active');
+          document.getElementById(label.attributes.for.value).checked = false;
+        }
+      }
+    })
+  });
+</script>
+{% endblock body %}

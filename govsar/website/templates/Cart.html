@@ -1,0 +1,42 @@
+{% extends 'nav.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4">My Shopping Cart</h1>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Items</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {% for item in cart.items %}
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <!-- <td>{{item.quantity}}</td>
+            <td>{{item.subtotal}}</td> -->
+            <td>
+                <button class="btn btn-sm btn-danger">Remove</button>
+            </td>
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-end">
+    <p class="fw-bold">Total: $35.00</p>
+  </div>
+  <div class="text-center">
+    <button class="btn btn-primary">Proceed to Checkout</button>
+  </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

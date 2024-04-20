@@ -1,0 +1,15 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<div class="mx-auto border">
+    <h2>Verify Phone Number</h2>
+    <form method="post" action="" class="mx-auto">
+        {% csrf_token %}
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" required>
+        <button type="submit">Send Verification Code</button>
+    </form>
+</div>
+
+{% endblock %}
