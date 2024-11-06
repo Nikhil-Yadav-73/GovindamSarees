@@ -9,7 +9,6 @@ now = timezone.now()
   
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    
     class Meta:
         ordering = ('name',)
         verbose_name_plural = 'categories'
@@ -27,7 +26,6 @@ class Post(models.Model):
     
     class Meta:
         ordering = ('created_at',)
-        
     def __str__(self):
         return self.title 
   

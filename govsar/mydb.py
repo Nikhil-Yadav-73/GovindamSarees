@@ -12,4 +12,4 @@ cursorObject.execute("use govsar;")
 cursorObject.execute("drop database govsar;")
 cursorObject.execute("create database govsar;")
 
-print("Ban Gaya!")
+print("ho Gaya!")
